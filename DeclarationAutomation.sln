@@ -3,14 +3,14 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29324.140
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeclarationAutomation.Test", "DeclarationAutomation.Test\DeclarationAutomation.Test.csproj", "{A59B16A2-B7A0-40F3-82C3-145F19246BC6}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeclarationAutomation.WinForms", "DeclarationAutomation.WinForms\DeclarationAutomation.WinForms.csproj", "{C4C8BE8B-2046-4171-B8FE-8D3E6FB68FAE}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D10644D8-5806-460C-9704-7FE5E53A2A99}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeclarationAutomation.Test", "DeclarationAutomation.Test\DeclarationAutomation.Test.csproj", "{A59B16A2-B7A0-40F3-82C3-145F19246BC6}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeclarationAutomation.WinForms", "DeclarationAutomation.WinForms\DeclarationAutomation.WinForms.csproj", "{C4C8BE8B-2046-4171-B8FE-8D3E6FB68FAE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeclarationAutomation.Core", "DeclarationAutomation.Core\DeclarationAutomation.Core.csproj", "{76E1FB45-8FCC-4329-AE69-A8D3081E614B}"
 EndProject
