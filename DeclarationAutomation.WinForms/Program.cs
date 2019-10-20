@@ -9,7 +9,7 @@ namespace DeclarationAutomation.WinForms
 {
     static class Program
     {
-        static ServiceProvider serviceProvider;
+        private static ServiceProvider? serviceProvider;
 
         /// <summary>
         ///  The main entry point for the application.
@@ -22,19 +22,25 @@ namespace DeclarationAutomation.WinForms
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MyApplicationContext());
+            Application.Run(serviceProvider.GetService<MyApplicationContext>());
         }
 
         private static void SetupDependencyInjector()
         {
             var serviceCollection = new ServiceCollection();
-            serviceCollection.AddSingleton<NotificationService>();
+            serviceCollection.AddSingleton<MyApplicationContext>();
+            serviceCollection.AddSingleton<TrayContextMenuService>();
+            serviceCollection.AddSingleton<OutOfOfficeCustomFormService>();
+            serviceCollection.AddSingleton<ITrayMenuItem, OutOfOfficeService>();
+            serviceCollection.AddSingleton<ITrayMenuItem, PreferenceService>();
+            serviceCollection.AddSingleton(GetMenuItemableFactory);
 
             serviceProvider = serviceCollection.BuildServiceProvider();
+        }
 
-            var notificationService = serviceProvider.GetService<NotificationService>();
-
-            Console.WriteLine(notificationService);
+        private static ITrayMenuItem[] GetMenuItemableFactory(IServiceProvider serviceProvider)
+        {
+            return serviceProvider.GetServices<ITrayMenuItem>().ToArray();
         }
     }
 }
