@@ -12,7 +12,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		.editorconfig = .editorconfig
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeclarationAutomation.Core", "DeclarationAutomation.Core\DeclarationAutomation.Core.csproj", "{76E1FB45-8FCC-4329-AE69-A8D3081E614B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DeclarationAutomation.Core", "DeclarationAutomation.Core\DeclarationAutomation.Core.csproj", "{76E1FB45-8FCC-4329-AE69-A8D3081E614B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DeclarationAutomation.ConsoleApp", "DeclarationAutomation.ConsoleApp\DeclarationAutomation.ConsoleApp.csproj", "{AE9E906D-6407-4D7E-9236-2A12750FF53F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -32,6 +34,10 @@ Global
 		{76E1FB45-8FCC-4329-AE69-A8D3081E614B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{76E1FB45-8FCC-4329-AE69-A8D3081E614B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{76E1FB45-8FCC-4329-AE69-A8D3081E614B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE9E906D-6407-4D7E-9236-2A12750FF53F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE9E906D-6407-4D7E-9236-2A12750FF53F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE9E906D-6407-4D7E-9236-2A12750FF53F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE9E906D-6407-4D7E-9236-2A12750FF53F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
