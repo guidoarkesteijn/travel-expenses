@@ -1,15 +1,17 @@
-﻿namespace DeclarationAutomation.Core.Sync
+﻿using System.Threading.Tasks;
+
+namespace DeclarationAutomation.Core.Sync
 {
     public abstract class BaseSyncProvider : ISyncProvider
     {
         public abstract bool Authenticated { get; }
         public abstract bool Connected { get; }
         
-        protected abstract bool SyncImpl();
+        protected abstract Task<IReport> SyncImpl();
 
-        public bool Sync()
+        public async Task<IReport> Sync()
         {
-            return SyncImpl();
+            return await SyncImpl();
         }
     }
 }

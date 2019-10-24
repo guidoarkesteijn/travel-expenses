@@ -1,4 +1,5 @@
-﻿using DeclarationAutomation.Core.ErrorReporting;
+﻿
+using DeclarationAutomation.Core.ErrorReporting;
 
 namespace DeclarationAutomation.Core.Sync
 {

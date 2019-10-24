@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace DeclarationAutomation.Core.Sync
 {
@@ -10,9 +11,10 @@ namespace DeclarationAutomation.Core.Sync
         public override bool Connected => connected;
         private bool connected;
 
-        protected override bool SyncImpl()
+        protected override async Task<IReport> SyncImpl()
         {
-            throw new NotImplementedException();
+            await Task.Delay(5000);
+            return new GoogleDriveReport(GoogleDriveReport.Status.SUCCESS);
         }
     }
 }
