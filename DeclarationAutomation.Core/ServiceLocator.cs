@@ -32,6 +32,7 @@ namespace DeclarationAutomation.Core
             var serviceCollection = new ServiceCollection();
             serviceCollection.AddSingleton<SyncService>();
             serviceCollection.AddSingleton<ISyncProvider, GoogleDriveSyncProvider>();
+            //Add multiple Sync providers.
             serviceCollection.AddSingleton(GetSyncProviders);
             serviceProvider = serviceCollection.BuildServiceProvider();
 

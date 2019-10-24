@@ -13,6 +13,11 @@ namespace DeclarationAutomation.ConsoleApp
         //TODO add nice way to add simple command line arugments with a package and forward them to the correct 'Controller'
         static void Main(string[] args)
         {
+            foreach (var item in args)
+            {
+                Console.WriteLine("Arg:" + item);
+            }
+
             bool completed = false;
             
             var locator = new CoreServiceLocator();
