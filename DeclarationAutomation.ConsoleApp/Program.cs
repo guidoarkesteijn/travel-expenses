@@ -6,6 +6,7 @@ using DeclarationAutomation.Core;
 using DeclarationAutomation.Core.Sync;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
+using CommandLine.Text;
 
 namespace DeclarationAutomation.ConsoleApp
 {
@@ -14,17 +15,30 @@ namespace DeclarationAutomation.ConsoleApp
         //TODO add nice way to add simple command line arugments with a package and forward them to the correct 'Controller'
         static async Task Main(string[] args)
         {
-            Parser.Default.ParseArguments<CommandLineOptions>(args)
-                .WithNotParsed(RunWithError)
-                .WithParsed(RunWithOptionsAndExit);
+            var parse = Parser.Default.ParseArguments<SyncOptions>(args);
+            parse.MapResult(
+                (SyncOptions x) => RunWithOptionsAndExit(x),
+                errs => RunWithError(parse, errs)
+            );
         }
 
-        private static void RunWithError(IEnumerable<Error> options)
+        private static int RunWithError(ParserResult<SyncOptions> parse, IEnumerable<Error> options)
         {
-            Console.WriteLine("error");
+            var helpText = HelpText.AutoBuild(parse, h =>
+                {
+                    // Configure HelpText	 
+                    h.AddEnumValuesToHelpText = true;
+                    return h;
+                },
+                e => e,
+                verbsIndex: true
+            );  //to show Verb help summary, set verbsIndex =true
+
+            Console.WriteLine(helpText);
+            return 1;
         }
 
-        private static void RunWithOptionsAndExit(CommandLineOptions options)
+        private static int RunWithOptionsAndExit(SyncOptions options)
         {
             var locator = new CoreServiceLocator();
             ITaskReportable syncService = locator.GetService<SyncService>();
@@ -33,6 +47,8 @@ namespace DeclarationAutomation.ConsoleApp
 
             //IReport report = await syncService.StartTask();
             //Console.Write(report);
+
+            return 0;
         }
     }
 }
