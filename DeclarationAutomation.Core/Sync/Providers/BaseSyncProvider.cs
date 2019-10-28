@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using DeclarationAutomation.Core.Report;
 
 namespace DeclarationAutomation.Core.Sync
 {

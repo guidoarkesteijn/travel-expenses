@@ -7,38 +7,40 @@ using DeclarationAutomation.Core.Sync;
 using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using CommandLine.Text;
+using DeclarationAutomation.ConsoleApp.CLIOptions;
+using DeclarationAutomation.Core.Report;
 
 namespace DeclarationAutomation.ConsoleApp
 {
     class Program
     {
-        //TODO add nice way to add simple command line arugments with a package and forward them to the correct 'Controller'
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
-            var parse = Parser.Default.ParseArguments<SyncOptions>(args);
+            var parse = Parser.Default.ParseArguments<SyncOptions,PublishOptions>(args);
             parse.MapResult(
-                (SyncOptions x) => RunWithOptionsAndExit(x),
+                (SyncOptions x) => RunSyncWithOptionsAndExit(x),
+                (PublishOptions o) => RunPublishWithOptionsAndExit(o),
                 errs => RunWithError(parse, errs)
             );
         }
 
-        private static int RunWithError(ParserResult<SyncOptions> parse, IEnumerable<Error> options)
+        private static int RunWithError(ParserResult<object> parseResult, IEnumerable<Error> options)
         {
-            var helpText = HelpText.AutoBuild(parse, h =>
+            var helpText = HelpText.AutoBuild(parseResult, h =>
                 {
-                    // Configure HelpText	 
+                    // Configure HelpText
                     h.AddEnumValuesToHelpText = true;
                     return h;
                 },
                 e => e,
                 verbsIndex: true
-            );  //to show Verb help summary, set verbsIndex =true
+            );
 
             Console.WriteLine(helpText);
             return 1;
         }
 
-        private static int RunWithOptionsAndExit(SyncOptions options)
+        private static int RunSyncWithOptionsAndExit(SyncOptions options)
         {
             var locator = new CoreServiceLocator();
             ITaskReportable syncService = locator.GetService<SyncService>();
@@ -48,6 +50,11 @@ namespace DeclarationAutomation.ConsoleApp
             //IReport report = await syncService.StartTask();
             //Console.Write(report);
 
+            return 0;
+        }
+
+        private static int RunPublishWithOptionsAndExit(PublishOptions publishOptions)
+        {
             return 0;
         }
     }
