@@ -7,7 +7,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace DeclarationAutomation.Core
 {
-    //TODO find out how to make a ServiceProvider to injecct in the layered projects.
+    //TODO find out how to make a ServiceProvider that can be added to a project specific service provider
     public class CoreServiceLocator
     {
         private ServiceProvider serviceProvider;
