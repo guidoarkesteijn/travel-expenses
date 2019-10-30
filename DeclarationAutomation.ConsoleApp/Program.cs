@@ -26,6 +26,7 @@ namespace DeclarationAutomation.ConsoleApp
 
         private static async Task<int> RunWithError(ParserResult<object> parseResult, IEnumerable<Error> options)
         {
+            //TODO find a way to remove the duplicate error text.
             var helpText = HelpText.AutoBuild(parseResult, h =>
                 {
                     // Configure HelpText
