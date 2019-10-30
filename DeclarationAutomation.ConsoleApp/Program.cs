@@ -12,7 +12,7 @@ namespace DeclarationAutomation.ConsoleApp
 {
     class Program
     {
-        static async Task<int> Main()
+        static async Task<int> Main(string [] args)
         {
             var parseResult = Parser.Default.ParseArguments<SyncOptions, PublishOptions>(args);
 
