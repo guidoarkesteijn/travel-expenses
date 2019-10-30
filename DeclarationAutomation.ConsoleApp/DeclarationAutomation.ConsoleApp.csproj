@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <ApplicationIcon />
+    <ApplicationIcon /> <!--ADD APP ICON HERE -->
     <StartupObject />
     <AssemblyName>travel-expenses</AssemblyName>
   </PropertyGroup>
