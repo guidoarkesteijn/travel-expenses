@@ -14,7 +14,6 @@ namespace DeclarationAutomation.ConsoleApp
     {
         static async Task<int> Main()
         {
-            var args = "publish".Split();
             var parseResult = Parser.Default.ParseArguments<SyncOptions, PublishOptions>(args);
 
             int result = await parseResult.MapResult(
