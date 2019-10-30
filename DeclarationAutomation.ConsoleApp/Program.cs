@@ -1,30 +1,31 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CommandLine;
-using DeclarationAutomation.Core;
-using DeclarationAutomation.Core.Sync;
-using Microsoft.Extensions.DependencyInjection;
-using System.Collections.Generic;
 using CommandLine.Text;
 using DeclarationAutomation.ConsoleApp.CLIOptions;
+using DeclarationAutomation.Core;
 using DeclarationAutomation.Core.Report;
+using DeclarationAutomation.Core.Sync;
 
 namespace DeclarationAutomation.ConsoleApp
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task<int> Main()
         {
-            var parse = Parser.Default.ParseArguments<SyncOptions,PublishOptions>(args);
-            parse.MapResult(
-                (SyncOptions x) => RunSyncWithOptionsAndExit(x),
-                (PublishOptions o) => RunPublishWithOptionsAndExit(o),
-                errs => RunWithError(parse, errs)
-            );
+            var args = "publish".Split();
+            var parseResult = Parser.Default.ParseArguments<SyncOptions, PublishOptions>(args);
+
+            int result = await parseResult.MapResult(
+              (SyncOptions opts) => RunSyncWithOptionsAndExit(opts),
+              (PublishOptions opts) => RunPublishWithOptionsAndExit(opts),
+              errs => RunWithError(parseResult, errs));
+
+            return result;
         }
 
-        private static int RunWithError(ParserResult<object> parseResult, IEnumerable<Error> options)
+        private static async Task<int> RunWithError(ParserResult<object> parseResult, IEnumerable<Error> options)
         {
             var helpText = HelpText.AutoBuild(parseResult, h =>
                 {
@@ -37,24 +38,29 @@ namespace DeclarationAutomation.ConsoleApp
             );
 
             Console.WriteLine(helpText);
-            return 1;
+            return await Task.FromResult(1);
         }
 
-        private static int RunSyncWithOptionsAndExit(SyncOptions options)
+        private static async Task<int> RunSyncWithOptionsAndExit(SyncOptions syncOptions)
         {
             var locator = new CoreServiceLocator();
-            ITaskReportable syncService = locator.GetService<SyncService>();
+            ITaskReportable<SyncData> syncService = locator.GetService<SyncService>();
+            IReport report = await syncService.StartTask(syncOptions.ToSyncData()).ConfigureAwait(true);
 
-            Console.WriteLine("Syncing");
+            Console.WriteLine(report);
 
-            //IReport report = await syncService.StartTask();
-            //Console.Write(report);
+            if (report.Success)
+            {
+                return 0;
+            }
 
-            return 0;
+            return -1;
         }
 
-        private static int RunPublishWithOptionsAndExit(PublishOptions publishOptions)
+        private static async Task<int> RunPublishWithOptionsAndExit(PublishOptions publishOptions)
         {
+            await Task.Delay(5000);
+
             return 0;
         }
     }

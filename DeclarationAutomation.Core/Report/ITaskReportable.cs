@@ -2,9 +2,9 @@
 
 namespace DeclarationAutomation.Core.Report
 {
-    public interface ITaskReportable
+    public interface ITaskReportable<T>
     {
-        Task<IReport> StartTask();
+        Task<IReport> StartTask(T data);
     }
 
 }

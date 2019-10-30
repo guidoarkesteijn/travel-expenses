@@ -5,7 +5,7 @@ using DeclarationAutomation.Core.Report;
 
 namespace DeclarationAutomation.Core.Sync
 {
-    public class SyncService : ITaskReportable
+    public class SyncService : ITaskReportable<SyncData>
     {
         private ISyncProvider[] syncProviders;
 
@@ -14,17 +14,35 @@ namespace DeclarationAutomation.Core.Sync
             this.syncProviders = syncProviders;
         }
 
-        public async Task<IReport> StartTask()
+        public async Task<IReport> StartTask(SyncData syncData)
         {
             var report = new BundleReport("Sync Service Report");
-            
-            foreach (var item in syncProviders)
+            var filteredProviders = GetSyncProviders(syncData.SyncProviderType);
+
+            foreach (var item in filteredProviders)
             {
                 IReport syncReport = await item.Sync();
                 report.AddReport(syncReport);
             }
 
             return report;
+        }
+
+        private ISyncProvider[] GetSyncProviders(SyncProviderType syncProviderType)
+        {
+            if(syncProviderType.HasFlag(SyncProviderType.All))
+            {
+                return syncProviders;
+            }
+
+            var filterSyncProviders = new List<ISyncProvider>();
+
+            foreach (var item in syncProviders)
+            {
+                syncProviderType.HasFlag(item.SyncProviderType);
+            }
+
+            return filterSyncProviders.ToArray();
         }
     }
 }

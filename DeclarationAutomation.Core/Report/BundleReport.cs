@@ -7,6 +7,21 @@ namespace DeclarationAutomation.Core.Report
     {
         public string Header { get; private set; }
 
+        public bool Success
+        {
+            get
+            {
+                foreach (var item in reports)
+                {
+                    if(!item.Success)
+                    {
+                        return false;
+                    }
+                }
+                return true;
+            }
+        }
+
         protected List<IReport> reports = new List<IReport>();
 
         public BundleReport(string message)

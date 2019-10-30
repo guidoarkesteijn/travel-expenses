@@ -4,13 +4,15 @@
     {
         public enum Status
         {
-            UNKNOWN = -1,
-            SUCCESS = 0,
-            FAILED = 1,
-            ABORTED = 2
+            Unknown = -1,
+            Success = 0,
+            Failed = 1,
+            Aborted = 2
         }
 
         private Status currentStatus;
+
+        public bool Success => currentStatus == Status.Success;
 
         public GoogleDriveReport(Status currentStatus)
         {

@@ -6,7 +6,7 @@ namespace DeclarationAutomation.ConsoleApp.CLIOptions
     [Verb("publish", HelpText = "Publish your declarations")]
     internal class PublishOptions : Options
     {
-        [Option('p', "provider", Default = PublishProviderType.All, Required = true, HelpText = "Select which provider to publish to.")]
+        [Option('p', "provider", Default = PublishProviderType.All, HelpText = "Select which provider to publish to.")]
         public PublishProviderType PublishProvider { get; set; }
     }
 }
