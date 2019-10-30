@@ -41,6 +41,7 @@ namespace DeclarationAutomation.ConsoleApp
             return await Task.FromResult(1);
         }
 
+        //TODO make this more generic between different methods? Sync, Publish, etc.
         private static async Task<int> RunSyncWithOptionsAndExit(SyncOptions syncOptions)
         {
             var locator = new CoreServiceLocator();
@@ -59,6 +60,7 @@ namespace DeclarationAutomation.ConsoleApp
 
         private static async Task<int> RunPublishWithOptionsAndExit(PublishOptions publishOptions)
         {
+            //TODO implement publishing
             await Task.Delay(5000);
 
             return 0;

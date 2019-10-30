@@ -4,7 +4,11 @@ using System.Text;
 
 namespace DeclarationAutomation.ConsoleApp.CLIOptions
 {
-    internal class Options
+    /// <summary>
+    /// Base class for Options passed into the CLI program.
+    /// (Will most likley be verbs)
+    /// </summary>
+    internal abstract class Options
     {
 
     }
